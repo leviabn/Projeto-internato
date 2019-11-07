@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "279227874809",
+    "firebase_url": "https://internato-5a8b6.firebaseio.com",
+    "project_id": "internato-5a8b6",
+    "storage_bucket": "internato-5a8b6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:279227874809:android:361779e51051bdde105128",
+        "android_client_info": {
+          "package_name": "com.example.internato_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "279227874809-a3lk47kr83idobm234ju2kqraarof8pm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6J_CABV5Z6QYp5lwpmxy4SRZo8aNLjOE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "279227874809-a3lk47kr83idobm234ju2kqraarof8pm.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
