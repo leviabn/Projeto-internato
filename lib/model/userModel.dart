@@ -22,12 +22,12 @@ class UserModel extends Model {
         .createUserWithEmailAndPassword(
             email: userData["email"], password: pass)
         .then((user) async {
-      //firebaseUser = user; 
+      firebaseUser = user;
       //DocumentSnapshot userD = await db.collection('usuarios').document(user.uid).get();
       await _saveUserData(userData);
-
       onSucess();
       isLoading = false;
+
       notifyListeners();
     }).catchError((e) {
       onFail();
@@ -36,18 +36,32 @@ class UserModel extends Model {
     });
   }
 
-  void singIn(String email, String senha) async {
+  void singIn(String email, String senha, VoidCallback onSuccess,
+      VoidCallback onFail) async {
     isLoading = true;
     notifyListeners();
-    await _auth.signInWithEmailAndPassword(email: email, password: senha);
-
+    await _auth
+        .signInWithEmailAndPassword(
+      email: email,
+      password: senha,
+    )
+        .then((user) {
+      firebaseUser = user;
+      onSuccess();
+      isLoading = false;
+      notifyListeners();
+    }).catchError((e) {
+      onFail();
+      isLoading = false;
+      notifyListeners();
+    });
     isLoading = false;
     notifyListeners();
   }
 
   void recorverPass() {}
 
-  bool isLoggedIn() {}
+  void isLoggedIn() {}
 
   Future<Null> _saveUserData(Map<String, dynamic> userData) async {
     this.userData = userData;
@@ -55,5 +69,51 @@ class UserModel extends Model {
         .collection("users")
         .document(firebaseUser.uid)
         .setData(userData);
+  }
+
+  Future<Null> saveOrdemData(
+      {Map<String, dynamic> ordemData, @required VoidCallback onSucess}) async {
+    isLoading = true;
+    notifyListeners();
+    await Firestore.instance
+        .collection("Ordem de serviço")
+        .document()
+        .setData(ordemData)
+        .then((_) {
+      onSucess();
+      isLoading = false;
+      notifyListeners();
+    }).catchError((e) {
+      isLoading = false;
+      notifyListeners();
+    });
+  }
+
+  // Future<Null> deleteEvento({Map<String, dynamic> eventoData, @required VoidCallback onSucess}){
+  //    isLoading = true;
+  //   notifyListeners();
+  //   await Firestore.instance
+  //       .collection("eventos")
+  //       .document()
+  //       .setData(eventoData)
+  // }
+
+  Future<Null> saveEventoData(
+      {Map<String, dynamic> eventoData, @required VoidCallback onSucess}) async {
+    isLoading = true;
+    notifyListeners();
+    await Firestore.instance
+        .collection("eventos")
+        .document()
+        .setData(eventoData)
+        .then((_) {
+      onSucess();
+      isLoading = false;
+      notifyListeners();
+    }).catchError((e) {
+      print(e);
+      isLoading = false;
+      notifyListeners();
+    });
   }
 }

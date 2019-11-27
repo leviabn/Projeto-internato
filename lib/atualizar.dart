@@ -1,14 +1,15 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:internato_app/model/userModel.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:image_picker/image_picker.dart';
 
-class Cadastro extends StatefulWidget {
+class Atualizar extends StatefulWidget {
   @override
   _CadastroState createState() => _CadastroState();
 }
 
-class _CadastroState extends State<Cadastro> {
+class _CadastroState extends State<Atualizar> {
   final _emailController = TextEditingController();
   final _senhaController = TextEditingController();
   final _telefoneController = TextEditingController();
@@ -21,9 +22,11 @@ class _CadastroState extends State<Cadastro> {
 
   @override
   Widget build(BuildContext context) {
+    //_emailController.text = widget.doc.data['email'];
+
     return Scaffold(
         appBar: AppBar(
-          title: Text("Criar usuário"),
+          title: Text("Editar Cadastro"),
           backgroundColor: Color.fromARGB(255, 85, 51, 111),
         ),
         body:
@@ -44,18 +47,24 @@ class _CadastroState extends State<Cadastro> {
                     children: <Widget>[
                       Text("\n"),
                       GestureDetector(
-                        child: Icon(Icons.person_add,size: 150,),
+                        child: Icon(
+                          Icons.person_add,
+                          size: 150,
+                        ),
                         onTap: () {
                           _optionsDialogBox();
                         },
-                      ),Text("\n"),
+                      ),
+                      Text("\n"),
                       TextFormField(
                         controller: _nomeController,
                         decoration: InputDecoration(
-                            hintText: "Nome Completo:",
+                            hintText: 'Eduardo Mendes',
                             labelStyle: TextStyle(color: Colors.black),
+                            hintStyle: TextStyle(color: Colors.blue[800]),
                             border: OutlineInputBorder()),
                         keyboardType: TextInputType.text,
+                        showCursor: false,
                         autofocus: true,
                         style:
                             TextStyle(color: Colors.blue[800], fontSize: 20.5),
@@ -64,10 +73,12 @@ class _CadastroState extends State<Cadastro> {
                       TextFormField(
                         controller: _emailController,
                         decoration: InputDecoration(
-                            hintText: "Email:",
+                            hintText: 'dudarts@adventista.com',
                             labelStyle: TextStyle(color: Colors.black),
+                            hintStyle: TextStyle(color: Colors.blue[800]),
                             border: OutlineInputBorder()),
                         keyboardType: TextInputType.text,
+                        showCursor: false,
                         autofocus: true,
                         style:
                             TextStyle(color: Colors.blue[800], fontSize: 20.5),
@@ -80,10 +91,12 @@ class _CadastroState extends State<Cadastro> {
                       TextFormField(
                         controller: _quartoController,
                         decoration: InputDecoration(
-                            hintText: "Número do Quarto:",
+                            hintText: "10",
                             labelStyle: TextStyle(color: Colors.black),
+                            hintStyle: TextStyle(color: Colors.blue[800]),
                             border: OutlineInputBorder()),
                         keyboardType: TextInputType.text,
+                        showCursor: false,
                         autofocus: true,
                         style:
                             TextStyle(color: Colors.blue[800], fontSize: 20.5),
@@ -92,10 +105,12 @@ class _CadastroState extends State<Cadastro> {
                       TextFormField(
                         controller: _senhaController,
                         decoration: InputDecoration(
-                            hintText: "Senha:",
+                            hintText: "**********",
                             labelStyle: TextStyle(color: Colors.black),
+                            hintStyle: TextStyle(color: Colors.blue[800]),
                             border: OutlineInputBorder()),
                         keyboardType: TextInputType.text,
+                        showCursor: false,
                         obscureText: true,
                         style:
                             TextStyle(color: Colors.blue[800], fontSize: 20.5),
@@ -108,10 +123,12 @@ class _CadastroState extends State<Cadastro> {
                       TextFormField(
                         controller: _telefoneController,
                         decoration: InputDecoration(
-                            hintText: "Telefone:",
+                            hintText: "85996126144",
                             labelStyle: TextStyle(color: Colors.black),
+                            hintStyle: TextStyle(color: Colors.blue[800]),
                             border: OutlineInputBorder()),
                         keyboardType: TextInputType.number,
+                        showCursor: false,
                         autofocus: true,
                         style:
                             TextStyle(color: Colors.blue[800], fontSize: 20.5),
@@ -139,7 +156,7 @@ class _CadastroState extends State<Cadastro> {
                           shape: new RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(20.0)),
                           child: Text(
-                            "Criar usuário",
+                            "Atualizar Cadastro",
                             style:
                                 TextStyle(color: Colors.white, fontSize: 20.5),
                           ),
